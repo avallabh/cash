@@ -13,8 +13,8 @@ items = CSV.parse("#{items}")
 sales = IO.read('sales.csv')
 sales = CSV.parse("#{sales}")
 x = 1
-y = items.length - 1
-yy = sales.length - 1
+items_length = items.length - 1
+sales_length = sales.length - 1
 
 puts "Welcome to James' Coffee Emporium!\n"
 while true
@@ -35,7 +35,7 @@ while true
       elsif Time.parse(input) > Time.now
         puts "Please enter a valid date not in the future."
       else
-        for x in (1..yy)
+        for x in (1..sales_length)
           if sales[x][0] == input
             items_array << sales[x][2].to_i
             gross << sales[x][3].to_f
@@ -51,7 +51,7 @@ while true
           puts "Net Profit: $#{gross.inject(0){|sum, z| sum + z} - cost.inject(0){|sum, z| sum + z}}"
           puts
         end
-        for x in (1..yy)
+        for x in (1..sales_length)
           if sales[x][0] == input
             puts "Date & Time: #{input} @ #{sales[x][1]}"
             puts "Number of items: #{sales[x][2]}"
@@ -67,7 +67,7 @@ while true
   elsif number == '2'
     # -------------- CUSTOMER PROGRAM ----------------
     puts "0) Complete Sale"
-    for x in (1..y)
+    for x in (items_length)
       puts "#{x}) Add item - #{items[x][0]} - $#{items[x][2]}"
       bags[items[x][0]] = 0
     end
